@@ -1,0 +1,5 @@
+com\aviation\entity\FlottePassagers.class
+com\aviation\entity\CompagnieAerienne.class
+com\aviation\entity\AvionLigne.class
+com\aviation\entity\Moteur.class
+com\aviation\resource\TemplateResource.class

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Compagnies Aériennes</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .select-container { margin-bottom: 2rem; }
+        select, button { padding: 10px; font-size: 16px; }
+        .stat-box { background: var(--accent-color); color: white; padding: 10px; display: inline-block; border-radius: 5px; margin-bottom: 1rem;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tableau de bord - Compagnies Aériennes</h1>
+        <nav class="navbar">
+            <a href="/index.html">Accueil Avions</a>
+            <a href="/compagnie.html">Compagnies</a>
+            <a href="/avion.html">Détails Avion</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="table-container">
+            <form action="/compagnie.html" method="GET" class="select-container">
+                <label for="compagnie-select"><strong>Choisir une compagnie :</strong></label>
+                <select name="id" id="compagnie-select">
+                    <option value="">-- Sélectionnez --</option>
+                    {#for c in compagnies}
+                        <option value="{c.idCompagnie}" {#if selectedId == c.idCompagnie}selected{/if}>{c.nom}</option>
+                    {/for}
+                </select>
+                <button type="submit">Afficher</button>
+            </form>
+
+            {#if selectedId}
+            <div id="details-section">
+                <div class="stat-box">
+                    Modèles exploitants différents : <strong>{nbModeles}</strong>
+                </div>
+
+                <h2>Modèles d'Avions Différents</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Constructeur</th>
+                            <th>Modèle</th>
+                            <th>Famille</th>
+                            <th>Moteurs</th>
+                            <th>Passagers (Max)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#for m in modeles}
+                        <tr>
+                            <td>{m.constructeur}</td>
+                            <td>{m.modele}</td>
+                            <td>{m.famille}</td>
+                            <td>{m.nbreMoteurs}</td>
+                            <td>{m.nbrePassMax}</td>
+                        </tr>
+                        {/for}
+                    </tbody>
+                </table>
+
+                <h2 style="margin-top: 30px;">Détails de la flotte exploitée</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Flotte</th>
+                            <th>Constructeur</th>
+                            <th>Modèle</th>
+                            <th>Nombre en service</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#for f in flotte}
+                        <tr>
+                            <td>{f[0]}</td> <!-- idFpass -->
+                            <td>{f[1]}</td> <!-- constructeur -->
+                            <td>{f[2]}</td> <!-- modele -->
+                            <td><strong>{f[3]}</strong></td> <!-- nombre -->
+                        </tr>
+                        {/for}
+                    </tbody>
+                </table>
+            </div>
+            {/if}
+        </section>
+    </main>
+</body>
+</html>

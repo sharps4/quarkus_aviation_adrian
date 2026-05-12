@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail Type Avion</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .select-container { margin-bottom: 2rem; }
+        select, button { padding: 10px; font-size: 16px; }
+        .grid-carac { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #eee; padding: 15px; border-radius: 5px;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tableau de bord - Type d'Avion</h1>
+        <nav class="navbar">
+            <a href="/index.html">Accueil Avions</a>
+            <a href="/compagnie.html">Compagnies</a>
+            <a href="/avion.html">Détails Avion</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="table-container">
+            <form action="/avion.html" method="GET" class="select-container">
+                <label for="avion-select"><strong>Choisir un type d'avion :</strong></label>
+                <select name="id" id="avion-select">
+                    <option value="">-- Sélectionnez --</option>
+                    {#for av in avions}
+                        <option value="{av.idAl}" {#if selectedId == av.idAl}selected{/if}>{av.constructeur} {av.modele}</option>
+                    {/for}
+                </select>
+                <button type="submit">Afficher</button>
+            </form>
+
+            {#if selectedAvion}
+            <div id="details-section">
+                <h2>Caractéristiques</h2>
+                <div class="grid-carac">
+                    <div><strong>Constructeur :</strong> {selectedAvion.constructeur}</div>
+                    <div><strong>Modèle :</strong> {selectedAvion.modele}</div>
+                    <div><strong>Envergure :</strong> {selectedAvion.envergure} m</div>
+                    <div><strong>Longueur :</strong> {selectedAvion.longueur} m</div>
+                    <div><strong>Moteurs :</strong> {selectedAvion.nbreMoteurs}</div>
+                    <div><strong>Capacité (Max) :</strong> {selectedAvion.nbrePassMax} passagers</div>
+                    <div><strong>Volume Cargo :</strong> {selectedAvion.volumeCargo} m³</div>
+                    <div><strong>Mise en service :</strong> {selectedAvion.miseEnService}</div>
+                </div>
+
+                <h2 style="margin-top: 30px;">Compagnies l'exploitant</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom de la Compagnie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#if compagnies.isEmpty}
+                        <tr><td colspan="2">Cet avion n'est exploité par aucune compagnie.</td></tr>
+                        {#else}
+                            {#for c in compagnies}
+                            <tr>
+                                <td>{c.idCompagnie}</td>
+                                <td>{c.nom}</td>
+                            </tr>
+                            {/for}
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+            {/if}
+        </section>
+    </main>
+</body>
+</html>

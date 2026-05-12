@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion de la flotte d'Avions</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Tableau de bord - Aviation</h1>
+        <nav class="navbar">
+            <a href="/index.html">Accueil Avions</a>
+            <a href="/compagnie.html">Compagnies</a>
+            <a href="/avion.html">Détails Avion</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="table-container">
+            <h2>Liste des avions de ligne</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Constructeur</th>
+                        <th>Modèle</th>
+                        <th>Nb Moteurs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#for avion in avions}
+                    <tr>
+                        <td>{avion.idAl}</td>
+                        <td>{avion.constructeur}</td>
+                        <td>{avion.modele}</td>
+                        <td>{avion.nbreMoteurs}</td>
+                    </tr>
+                    {/for}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
